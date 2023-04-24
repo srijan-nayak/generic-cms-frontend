@@ -14,6 +14,7 @@ import { CardComponent } from './components/card/card.component';
 import { PageHeadingComponent } from './components/page-heading/page-heading.component';
 import { PostFormComponent } from './posts/post-form/post-form.component';
 import { quillFormats, quillModules } from './quill.config';
+import { EditPostPageComponent } from './posts/edit-post-page/edit-post-page.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { quillFormats, quillModules } from './quill.config';
     PostFormComponent,
     AllPostsPageComponent,
     NewPostPageComponent,
+    EditPostPageComponent,
   ],
   imports: [
     BrowserModule,

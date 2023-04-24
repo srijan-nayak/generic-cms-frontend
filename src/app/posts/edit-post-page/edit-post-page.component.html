@@ -1,0 +1,7 @@
+<app-page-heading text="Edit Post"></app-page-heading>
+
+<app-post-form
+  *ngIf="post"
+  [post]="post"
+  (onSubmit)="onFormSubmit($event)"
+></app-post-form>

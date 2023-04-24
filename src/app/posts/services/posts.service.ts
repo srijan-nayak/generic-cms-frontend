@@ -16,7 +16,15 @@ export class PostsService {
     return this.http.get<Post[]>(this.apiUrl + '/posts');
   }
 
+  getPost(postId: string) {
+    return this.http.get<Post>(this.apiUrl + '/posts/' + postId);
+  }
+
   createPost(postData: PostDto) {
     return this.http.post<Post>(this.apiUrl + '/posts', postData);
+  }
+
+  editPost(postId: string, postData: PostDto) {
+    return this.http.put<Post>(this.apiUrl + '/posts/' + postId, postData);
   }
 }
