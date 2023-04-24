@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { AllPostsPageComponent } from './posts/all-posts-page/all-posts-page.component';
+import { NewPostPageComponent } from './posts/new-post-page/new-post-page.component';
 import { CardComponent } from './components/card/card.component';
 import { PageHeadingComponent } from './components/page-heading/page-heading.component';
 import { PostFormComponent } from './posts/post-form/post-form.component';
@@ -19,10 +20,11 @@ import { quillFormats, quillModules } from './quill.config';
     AppComponent,
     LayoutComponent,
     NavBarComponent,
-    AllPostsPageComponent,
-    CardComponent,
     PageHeadingComponent,
+    CardComponent,
     PostFormComponent,
+    AllPostsPageComponent,
+    NewPostPageComponent,
   ],
   imports: [
     BrowserModule,

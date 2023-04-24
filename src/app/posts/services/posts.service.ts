@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import Post from '../models/post';
+import PostDto from '../models/post-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -13,5 +14,9 @@ export class PostsService {
 
   getPosts() {
     return this.http.get<Post[]>(this.apiUrl + '/posts');
+  }
+
+  createPost(postData: PostDto) {
+    return this.http.post<Post>(this.apiUrl + '/posts', postData);
   }
 }
