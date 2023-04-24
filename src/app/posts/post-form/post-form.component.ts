@@ -34,12 +34,14 @@ export class PostFormComponent implements OnInit {
       return;
     }
     const { title, author, image, content } = this.post;
-    this.postForm.setValue({
-      title: title,
-      author: author,
-      image: image,
-      content: content,
+    this.postForm.patchValue({
+      title,
+      author,
+      content,
     });
+    if (image) {
+      this.postForm.patchValue({ image });
+    }
   }
 
   onFormSubmit() {
