@@ -1,0 +1,13 @@
+<app-page-heading text="Manage Posts"></app-page-heading>
+
+<app-card>
+  <ul class="divide-y-2">
+    <li *ngFor="let post of posts" class="py-3 first:pt-0 last:pb-0">
+      <a
+        [routerLink]="['/posts', post.postId, 'edit']"
+        class="text-2xl text-gray-600 font-medium inline-block transition-all hover:scale-105 hover:p-1 hover:text-gray-900"
+        >{{ post.title }}</a
+      >
+    </li>
+  </ul>
+</app-card>
