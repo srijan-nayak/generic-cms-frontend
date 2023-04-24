@@ -1,0 +1,119 @@
+<app-card>
+  <form
+    [formGroup]="postForm"
+    (ngSubmit)="onFormSubmit()"
+    class="flex flex-col gap-5"
+  >
+    <!--  title form group  -->
+    <div class="flex flex-col gap-2">
+      <label for="title" class="text-2xl text-gray-600 font-medium"
+        >Title</label
+      >
+      <input
+        type="text"
+        id="title"
+        formControlName="title"
+        class="bg-gray-200 text-lg rounded py-2 px-3"
+      />
+      <div
+        *ngIf="
+          postForm.controls.title.invalid &&
+          (postForm.controls.title.dirty || postForm.controls.title.touched)
+        "
+        class="text-red-700"
+      >
+        <span *ngIf="postForm.controls.title.errors?.['required']"
+          >Title is required.</span
+        >
+        <span *ngIf="postForm.controls.title.errors?.['minlength']"
+          >Title should be at least 5 characters</span
+        >
+      </div>
+    </div>
+
+    <!--  author form group  -->
+    <div class="flex flex-col gap-2">
+      <label for="author" class="text-2xl text-gray-600 font-medium"
+        >Author</label
+      >
+      <input
+        type="text"
+        id="author"
+        formControlName="author"
+        class="bg-gray-200 text-lg rounded py-2 px-3"
+      />
+      <div
+        *ngIf="
+          postForm.controls.author.invalid &&
+          (postForm.controls.author.dirty || postForm.controls.author.touched)
+        "
+        class="text-red-700"
+      >
+        <span *ngIf="postForm.controls.author.errors?.['required']"
+          >Author name is required.</span
+        >
+        <span *ngIf="postForm.controls.author.errors?.['minlength']"
+          >Author name should be at least 3 characters</span
+        >
+      </div>
+    </div>
+
+    <!--  image form group  -->
+    <div class="flex flex-col gap-2">
+      <label for="image" class="text-2xl text-gray-600 font-medium"
+        >Image link <span class="text-gray-500 text-lg">(Optional)</span></label
+      >
+      <input
+        type="url"
+        id="image"
+        formControlName="image"
+        class="bg-gray-200 text-lg rounded py-2 px-3"
+      />
+      <span
+        *ngIf="postForm.controls.image.errors?.['pattern']; else imagePreview"
+        class="text-red-700"
+        >Value must be a valid URL</span
+      >
+      <ng-template #imagePreview>
+        <img
+          *ngIf="postForm.value.image"
+          [src]="postForm.value.image"
+          alt="Image preview"
+        />
+      </ng-template>
+    </div>
+
+    <!--  content form group  -->
+    <div class="flex flex-col gap-2">
+      <label for="content" class="text-2xl text-gray-600 font-medium"
+        >Content</label
+      >
+      <quill-editor
+        id="content"
+        [styles]="{ height: '250px' }"
+        formControlName="content"
+      ></quill-editor>
+      <div
+        *ngIf="
+          postForm.controls.content.invalid &&
+          (postForm.controls.content.dirty || postForm.controls.content.touched)
+        "
+        class="text-red-700"
+      >
+        <span *ngIf="postForm.controls.content.errors?.['required']"
+          >Content is required.</span
+        >
+        <span *ngIf="postForm.controls.content.errors?.['minlength']"
+          >Content HTML should be at least 50 characters</span
+        >
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="bg-gray-600 text-white text-xl font-medium tracking-wide px-4 py-2 rounded transition-all hover:bg-gray-700 hover:font-bold disabled:bg-gray-400 disabled:font-medium"
+      [disabled]="postForm.invalid"
+    >
+      SUBMIT
+    </button>
+  </form>
+</app-card>
