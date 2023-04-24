@@ -3,10 +3,10 @@ import { PostsService } from '../services/posts.service';
 import Post from '../models/post';
 
 @Component({
-  selector: 'app-posts-list',
-  templateUrl: './posts-list.component.html',
+  selector: 'app-all-posts-page',
+  templateUrl: './all-posts-page.component.html',
 })
-export class PostsListComponent implements OnInit {
+export class AllPostsPageComponent implements OnInit {
   posts: Post[] = [];
 
   constructor(private readonly postsService: PostsService) {}

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PostsListComponent } from './posts/posts-list/posts-list.component';
+import { AllPostsPageComponent } from './posts/all-posts-page/all-posts-page.component';
 
 const routes: Routes = [
-  { path: 'posts', component: PostsListComponent },
+  { path: 'posts', component: AllPostsPageComponent },
   {path: '', redirectTo: 'posts', pathMatch: 'full'},
   { path: '**', redirectTo: 'posts' },
 ];
