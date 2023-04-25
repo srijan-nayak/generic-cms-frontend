@@ -32,4 +32,10 @@ export class EditPostPageComponent implements OnInit {
       .editPost(this.postId!, postData)
       .subscribe((_post) => this.router.navigate(['..']));
   }
+
+  onDelete() {
+    this.postsService
+      .deletePost(this.postId!)
+      .subscribe((_post) => this.router.navigate(['..']));
+  }
 }

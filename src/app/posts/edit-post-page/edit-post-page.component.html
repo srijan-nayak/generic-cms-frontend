@@ -1,7 +1,14 @@
 <app-page-heading text="Edit Post"></app-page-heading>
 
-<app-post-form
-  *ngIf="post"
-  [post]="post"
-  (onSubmit)="onFormSubmit($event)"
-></app-post-form>
+<section *ngIf="post" class="flex flex-col gap-6">
+  <app-post-form
+    [post]="post"
+    (onSubmit)="onFormSubmit($event)"
+  ></app-post-form>
+  <button
+    (click)="onDelete()"
+    class="bg-red-500 text-white text-xl font-medium py-2 rounded-lg drop-shadow-xl transition-all hover:bg-red-600 hover:font-bold hover:drop-shadow-2xl"
+  >
+    DELETE POST
+  </button>
+</section>

@@ -27,4 +27,8 @@ export class PostsService {
   editPost(postId: string, postData: PostDto) {
     return this.http.put<Post>(this.apiUrl + '/posts/' + postId, postData);
   }
+
+  deletePost(postId: string) {
+    return this.http.delete<Post>(this.apiUrl + '/posts/' + postId);
+  }
 }
