@@ -1,27 +1,33 @@
-# GenericCmsFrontend
+# Generic CMS Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
+![Create post page](screenshots/create-post-page.png)
 
-## Development server
+A frontend built for a generic CMS that is used to manage posts for a blog site
+built with [Angular][angular-site]. This project depends on the backend API from
+the [srijan-nayak/cms-backend][cms-backend-repo] project.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Running the project locally.
 
-## Code scaffolding
+### Start backend API
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Ensure that the backend API is running on [localhost:3300](http://localhost:3300)
+by following the instructions from the [cms-backend repository][cms-backend-repo].
 
-## Build
+### Clone and install dependencies
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+git clone https://github.com/srijan-nayak/generic-cms-frontend.git
+cd generic-cms-frontend
+npm install
+```
 
-## Running unit tests
+### Start the development server
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+npm start
+```
 
-## Running end-to-end tests
+The application will be accessible on [localhost:3300](http://localhost:4200/)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+[angular-site]: https://angular.io/ "Angular framework landing page"
+[cms-backend-repo]: https://github.com/srijan-nayak/cms-backend "cms-backend repository"
