@@ -7,7 +7,7 @@ import Post from '../models/post';
   templateUrl: './all-posts-page.component.html',
 })
 export class AllPostsPageComponent implements OnInit {
-  posts: Post[] = [];
+  posts?: Post[];
 
   constructor(private readonly postsService: PostsService) {}
 
