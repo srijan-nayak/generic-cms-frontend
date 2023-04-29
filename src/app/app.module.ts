@@ -15,6 +15,7 @@ import { PageHeadingComponent } from './components/page-heading/page-heading.com
 import { PostFormComponent } from './posts/post-form/post-form.component';
 import { quillFormats, quillModules } from './quill.config';
 import { EditPostPageComponent } from './posts/edit-post-page/edit-post-page.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { EditPostPageComponent } from './posts/edit-post-page/edit-post-page.com
     AllPostsPageComponent,
     NewPostPageComponent,
     EditPostPageComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
