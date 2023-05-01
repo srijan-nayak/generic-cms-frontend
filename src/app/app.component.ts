@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <app-layout>
       <router-outlet></router-outlet>
+      <app-alert></app-alert>
     </app-layout>
   `,
 })
