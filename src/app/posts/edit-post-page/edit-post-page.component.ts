@@ -3,6 +3,7 @@ import { PostsService } from '../services/posts.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Post from '../models/post';
 import PostDto from '../models/post-dto';
+import { AlertsService } from '../../alert/services/alerts.service';
 
 @Component({
   selector: 'app-edit-post-page',
@@ -14,6 +15,7 @@ export class EditPostPageComponent implements OnInit {
 
   constructor(
     private readonly postsService: PostsService,
+    private readonly alertsService: AlertsService,
     private readonly route: ActivatedRoute,
     private readonly router: Router
   ) {}
@@ -30,12 +32,13 @@ export class EditPostPageComponent implements OnInit {
   onFormSubmit(postData: PostDto) {
     this.postsService
       .editPost(this.postId!, postData)
-      .subscribe((_post) => this.router.navigate(['..']));
+      .subscribe((_post) => this.alertsService.createAlert('Post edited!'));
   }
 
   onDelete() {
-    this.postsService
-      .deletePost(this.postId!)
-      .subscribe((_post) => this.router.navigate(['..']));
+    this.postsService.deletePost(this.postId!).subscribe(async (_post) => {
+      this.alertsService.createAlert('Post deleted!');
+      await this.router.navigate(['..']);
+    });
   }
 }

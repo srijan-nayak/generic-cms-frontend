@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
@@ -16,6 +17,7 @@ import { PostFormComponent } from './posts/post-form/post-form.component';
 import { quillFormats, quillModules } from './quill.config';
 import { EditPostPageComponent } from './posts/edit-post-page/edit-post-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { AlertComponent } from './alert/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -29,9 +31,11 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
     NewPostPageComponent,
     EditPostPageComponent,
     NotFoundPageComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
