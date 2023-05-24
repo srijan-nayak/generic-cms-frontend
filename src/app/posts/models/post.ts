@@ -4,6 +4,8 @@ interface Post {
   author: string;
   image?: string;
   content: string;
+  titleColor: string;
+  backgroundColor: string;
 }
 
 export default Post;

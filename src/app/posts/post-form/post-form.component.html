@@ -13,7 +13,11 @@
         type="text"
         id="title"
         formControlName="title"
-        class="bg-gray-200 text-lg rounded py-2 px-3"
+        class="border-2 border-gray-200 text-lg font-bold rounded py-2 px-3"
+        [ngStyle]="{
+          color: postForm.value.titleColor,
+          backgroundColor: postForm.value.backgroundColor
+        }"
       />
       <div
         *ngIf="
@@ -27,6 +31,62 @@
         <span *ngIf="postForm.controls.title.errors?.['minlength']"
           >Title should be at least 5 characters</span
         >
+      </div>
+    </div>
+
+    <div class="flex gap-20">
+      <!--  title color form group  -->
+      <div class="flex flex-col gap-2">
+        <label for="title" class="text-2xl text-gray-600 font-medium"
+          >Title color</label
+        >
+        <input
+          type="color"
+          id="title-color"
+          formControlName="titleColor"
+          class="bg-gray-200 text-lg rounded py-2 px-3 h-12 w-28"
+        />
+        <div
+          *ngIf="
+            postForm.controls.titleColor.touched &&
+            postForm.controls.titleColor.invalid
+          "
+          class="text-red-700"
+        >
+          <span *ngIf="postForm.controls.titleColor.errors?.['required']"
+            >Title color is required.</span
+          >
+          <span *ngIf="postForm.controls.titleColor.errors?.['pattern']"
+            >Title color should be a valid HEX color.</span
+          >
+        </div>
+      </div>
+
+      <!--  background color form group  -->
+      <div class="flex flex-col gap-2">
+        <label for="title" class="text-2xl text-gray-600 font-medium"
+          >Background color</label
+        >
+        <input
+          type="color"
+          id="background-color"
+          formControlName="backgroundColor"
+          class="bg-gray-200 text-lg rounded py-2 px-3 h-12 w-28"
+        />
+        <div
+          *ngIf="
+            postForm.controls.backgroundColor.touched &&
+            postForm.controls.backgroundColor.invalid
+          "
+          class="text-red-700"
+        >
+          <span *ngIf="postForm.controls.backgroundColor.errors?.['required']"
+            >Background color is required.</span
+          >
+          <span *ngIf="postForm.controls.backgroundColor.errors?.['pattern']"
+            >Background color should be a valid HEX color.</span
+          >
+        </div>
       </div>
     </div>
 
@@ -91,7 +151,8 @@
         [styles]="{
           height: '250px',
           fontSize: '1.25rem',
-          lineHeight: '1.75rem'
+          lineHeight: '1.75rem',
+          backgroundColor: postForm.value.backgroundColor
         }"
         formControlName="content"
       ></quill-editor>

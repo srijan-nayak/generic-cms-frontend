@@ -22,18 +22,26 @@ export class PostFormComponent implements OnInit {
   @Output()
   onSubmit = new EventEmitter<PostDto>();
 
+  private readonly isHexColor = Validators.pattern(/^#[0-9A-Fa-f]{6}$/);
+  private readonly isUrl = Validators.pattern(
+    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+  );
+
   postForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(5)]),
     author: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    image: new FormControl<undefined | string>(
-      undefined,
-      Validators.pattern(
-        /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
-      )
-    ),
+    image: new FormControl<undefined | string>(undefined, this.isUrl),
     content: new FormControl<SafeHtml | string>('', [
       Validators.required,
       Validators.minLength(50),
+    ]),
+    titleColor: new FormControl('#000000', [
+      Validators.required,
+      this.isHexColor,
+    ]),
+    backgroundColor: new FormControl('#ffffff', [
+      Validators.required,
+      this.isHexColor,
     ]),
   });
 
@@ -43,10 +51,13 @@ export class PostFormComponent implements OnInit {
     if (!this.post) {
       return;
     }
-    const { title, author, image, content } = this.post;
+    const { title, author, image, content, titleColor, backgroundColor } =
+      this.post;
     this.postForm.patchValue({
       title,
       author,
+      titleColor,
+      backgroundColor,
       content: this.sanitizer.bypassSecurityTrustHtml(content),
     });
     if (image) {
@@ -55,10 +66,13 @@ export class PostFormComponent implements OnInit {
   }
 
   onFormSubmit() {
-    const { title, author, image, content } = this.postForm.value;
+    const { title, author, image, content, titleColor, backgroundColor } =
+      this.postForm.value;
     const postData: PostDto = {
       title: title!,
       author: author!,
+      titleColor: titleColor!,
+      backgroundColor: backgroundColor!,
       // content might be a SafeHtmlImpl object if control is not dirty
       content: this.postForm.controls.content.dirty
         ? (content as string)
