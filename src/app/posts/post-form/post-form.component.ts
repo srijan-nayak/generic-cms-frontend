@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import Post from '../models/post';
 import PostDto from '../models/post-dto';
 
@@ -29,6 +30,8 @@ export class PostFormComponent implements OnInit {
     ]),
   });
 
+  constructor(private sanitizer: DomSanitizer) {}
+
   ngOnInit() {
     if (!this.post) {
       return;
@@ -37,7 +40,7 @@ export class PostFormComponent implements OnInit {
     this.postForm.patchValue({
       title,
       author,
-      content,
+      content: this.sanitizer.bypassSecurityTrustHtml(content) as string,
     });
     if (image) {
       this.postForm.patchValue({ image });
