@@ -17,8 +17,7 @@
       />
       <div
         *ngIf="
-          postForm.controls.title.invalid &&
-          (postForm.controls.title.dirty || postForm.controls.title.touched)
+          postForm.controls.title.touched && postForm.controls.title.invalid
         "
         class="text-red-700"
       >
@@ -44,8 +43,7 @@
       />
       <div
         *ngIf="
-          postForm.controls.author.invalid &&
-          (postForm.controls.author.dirty || postForm.controls.author.touched)
+          postForm.controls.author.touched && postForm.controls.author.invalid
         "
         class="text-red-700"
       >
@@ -90,13 +88,16 @@
       >
       <quill-editor
         id="content"
-        [styles]="{ height: '250px', fontSize: '1.25rem', lineHeight: '1.75rem' }"
+        [styles]="{
+          height: '250px',
+          fontSize: '1.25rem',
+          lineHeight: '1.75rem'
+        }"
         formControlName="content"
       ></quill-editor>
       <div
         *ngIf="
-          postForm.controls.content.invalid &&
-          (postForm.controls.content.dirty || postForm.controls.content.touched)
+          postForm.controls.content.touched && postForm.controls.content.invalid
         "
         class="text-red-700"
       >
