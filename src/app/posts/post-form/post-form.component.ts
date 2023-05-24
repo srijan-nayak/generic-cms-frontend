@@ -1,6 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SecurityContext,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import Post from '../models/post';
 import PostDto from '../models/post-dto';
 
@@ -24,7 +31,7 @@ export class PostFormComponent implements OnInit {
         /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
       )
     ),
-    content: new FormControl('', [
+    content: new FormControl<SafeHtml | string>('', [
       Validators.required,
       Validators.minLength(50),
     ]),
@@ -40,7 +47,7 @@ export class PostFormComponent implements OnInit {
     this.postForm.patchValue({
       title,
       author,
-      content: this.sanitizer.bypassSecurityTrustHtml(content) as string,
+      content: this.sanitizer.bypassSecurityTrustHtml(content),
     });
     if (image) {
       this.postForm.patchValue({ image });
@@ -52,7 +59,10 @@ export class PostFormComponent implements OnInit {
     const postData: PostDto = {
       title: title!,
       author: author!,
-      content: content!,
+      // content might be a SafeHtmlImpl object if control is not dirty
+      content: this.postForm.controls.content.dirty
+        ? (content as string)
+        : (this.sanitizer.sanitize(SecurityContext.HTML, content!) as string),
     };
     // image should not have the value null in the post data object
     if (image && image.trim() !== '') {
