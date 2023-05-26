@@ -30,7 +30,7 @@ export class PostFormComponent implements OnInit {
   postForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(5)]),
     author: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    image: new FormControl<undefined | string>(undefined, this.isUrl),
+    image: new FormControl('', [Validators.required, this.isUrl]),
     content: new FormControl<SafeHtml | string>('', [
       Validators.required,
       Validators.minLength(50),
@@ -58,11 +58,9 @@ export class PostFormComponent implements OnInit {
       author,
       titleColor,
       backgroundColor,
+      image,
       content: this.sanitizer.bypassSecurityTrustHtml(content),
     });
-    if (image) {
-      this.postForm.patchValue({ image });
-    }
   }
 
   onFormSubmit() {
@@ -73,15 +71,12 @@ export class PostFormComponent implements OnInit {
       author: author!,
       titleColor: titleColor!,
       backgroundColor: backgroundColor!,
+      image: image!,
       // content might be a SafeHtmlImpl object if control is not dirty
       content: this.postForm.controls.content.dirty
         ? (content as string)
         : (this.sanitizer.sanitize(SecurityContext.HTML, content!) as string),
     };
-    // image should not have the value null in the post data object
-    if (image && image.trim() !== '') {
-      postData.image = image;
-    }
     this.onSubmit.emit(postData);
   }
 }
